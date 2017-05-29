@@ -107,6 +107,11 @@ extern int sys_setuid(void); // Added for Project 2: UIDs and GIDs and PPIDs
 extern int sys_setgid(void); // Added for Project 2: UIDs and GIDs and PPIDs
 extern int sys_getprocs(void); // Added for Project 2: The "ps" Command
 extern int sys_setpriority(void); // Added for Project 4: The setpriority() System Call
+#ifdef CS333_P5
+extern int sys_chmod(void); // Added for Project 5: New System Calls
+extern int sys_chown(void); // Added for Project 5: New System Calls
+extern int sys_chgrp(void); // Added for Project 5: New System Calls
+#endif
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -139,11 +144,16 @@ static int (*syscalls[])(void) = {
 [SYS_setgid]  sys_setgid, // Added for Project 2: UIDs and GIDs and PPIDs
 [SYS_getprocs] sys_getprocs, // Added for Project 2: The "ps" Command
 [SYS_setpriority] sys_setpriority, // Added for Project 4: The setpriority() System Call
+#ifdef CS333_P5
+[SYS_chmod]  sys_chmod, // Added for Project 5: New System Calls
+[SYS_chown]  sys_chown, // Added for Project 5: New System Calls
+[SYS_chgrp]  sys_chgrp, // Added for Project 5: New System Calls
+#endif
 };
 
 // START: Added for Project 1: System Call Tracing
 #ifdef PRINT_SYSCALLS
-static const char* const syscallnames[30] = {
+static const char* const syscallnames[34] = {
 "NONE",
 "fork",
 "exit",
@@ -175,6 +185,11 @@ static const char* const syscallnames[30] = {
 "setgid", // Added for Project 2: UIDs and GIDs and PPIDs
 "getprocs", // Added for Project 2: The "ps" Command
 "setpriority", // Added for Project 4: The serpriority() System Call
+#ifdef CS333_P5
+"chmod", // Added for Project 5: New System Calls
+"chown", // Added for Project 5: New System Calls
+"chgrp", // Added for Project 5: New System Calls
+#endif
 };
 #endif
 // END: Added for Project 1: System Call Tracing

@@ -33,6 +33,11 @@ int setuid(uint uid); // set UID. Added for Project 2: UIDs and GIDs and PPIDs
 int setgid(uint gid); // set GID. Added for Project 2: UIDs and GIDs and PPIDs
 int getprocs(uint max, struct uproc *table); // Get proc info. Added for Project 2: The "ps" Command
 int setpriority(int pid, int priority); // Added for Project 4: The setpriority() System Call
+#ifdef CS333_P5
+int chmod(char *pathname, int mode); // Added for Project 5: New System Calls
+int chown(char *pathname, int owner); // Added for Project 5: New System Calls
+int chgrp(char *pathname, int group); // Added for Project 5: New System Calls
+#endif
 
 // ulib.c
 int stat(char*, struct stat*);

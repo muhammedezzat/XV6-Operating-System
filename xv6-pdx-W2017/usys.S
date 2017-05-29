@@ -38,3 +38,6 @@ SYSCALL(setuid) // Added for Project 2: UIDs and GIDs and PPIDs
 SYSCALL(setgid) // Added for Project 2: UIDs and GIDs and PPIDs  
 SYSCALL(getprocs) // Added for Project 2: The "ps" Command
 SYSCALL(setpriority) // Added for Project 4: The setpriority() System Call
+SYSCALL(chmod) // Added for Project 5: New System Calls
+SYSCALL(chown) // Added for Project 5: New System Calls
+SYSCALL(chgrp) // Added for Project 5: New System Calls
