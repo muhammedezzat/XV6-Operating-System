@@ -6,6 +6,8 @@
 #include "defs.h"
 #include "x86.h"
 #include "elf.h"
+#include "fs.h"
+#include "file.h"
 
 int
 exec(char *path, char **argv)
@@ -18,12 +20,30 @@ exec(char *path, char **argv)
   struct proghdr ph;
   pde_t *pgdir, *oldpgdir;
 
+  #ifdef CS333_P5 // Added for Project 5: Modified System Calls
+  int tempUID = -1; // set to negative value since it is illegal UID value
+  #endif
+
   begin_op();
   if((ip = namei(path)) == 0){
     end_op();
     return -1;
   }
   ilock(ip);
+
+  #ifdef CS333_P5 // Added for Project 5: Modified System Calls
+  // if at least one of these evaluates true then we proceed, otherwise goto bad
+  if (!((ip->mode.flags.u_x == 1 && proc->uid == ip->uid) || // check user permissions first
+        (ip->mode.flags.g_x == 1 && proc->gid == ip->gid) || // then check group permissions
+        (ip->mode.flags.o_x == 1))){ 			     // finally check other permissions
+    goto bad;
+  }
+
+  // if we're setting uid then store the uid in temp variable to set proc later
+  if (ip->mode.flags.setuid == 1)
+    tempUID = ip->uid;
+  #endif
+
   pgdir = 0;
 
   // Check ELF header
@@ -92,6 +112,12 @@ exec(char *path, char **argv)
   proc->sz = sz;
   proc->tf->eip = elf.entry;  // main
   proc->tf->esp = sp;
+
+  #ifdef CS333_P5 // Added for Project 5: Modified System Calls
+  if(tempUID != -1) // if tempUID has been modified from init value then set proc uid
+    proc->uid = tempUID;
+  #endif
+  
   switchuvm(proc);
   freevm(oldpgdir);
   return 0;

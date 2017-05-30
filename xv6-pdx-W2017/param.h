@@ -17,3 +17,4 @@
 #define MAX	     0 // Added for Project 4: Process Priority
 #define TICKS_TO_PROMOTE 1000 // Added for Project 4: Periodic Priority Adjustment
 #define DEFAULT_BUDGET 300 // Added for Project 4: Periodic Priority Adjustment
+#define DEFAULT_MODE 00755; // Default file mode. TODO: Leading 0 marks it as octal? Added for Project 5: inode / dinode

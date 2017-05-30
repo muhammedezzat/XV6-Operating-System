@@ -3,6 +3,8 @@
 #include "user.h"
 #include "fs.h"
 
+void print_mode(struct stat* st); // Added for Project 5: Modified Commands (prototype for code that was copied from print_mode.c as recommended in the assignment)
+
 char*
 fmtname(char *path)
 {
@@ -40,10 +42,21 @@ ls(char *path)
     close(fd);
     return;
   }
-  
+ 
+  #ifdef CS333_P5 // Added for Project 5: Modified Commands
+  printf(1, "mode\t\tname\tuid\tgid\tinode\tsize\n"); // print table header
+  #endif
+ 
   switch(st.type){
   case T_FILE:
+    
+    #ifdef CS333_P5 // Added for Project 5: Modified Commands
+    print_mode(&st); // print mode with provided helper function
+    printf(1, " %s%d\t%d\t%d\t%d\n", fmtname(path), st.uid, st.gid, st.ino, st.size); // print data
+    #else
     printf(1, "%s %d %d %d\n", fmtname(path), st.type, st.ino, st.size);
+    #endif
+
     break;
   
   case T_DIR:
@@ -63,7 +76,13 @@ ls(char *path)
         printf(1, "ls: cannot stat %s\n", buf);
         continue;
       }
+      
+      #ifdef CS333_P5 // Added for Project 5: Modified Commands
+      print_mode(&st); // print mode with provided helper function
+      printf(1, " %s%d\t%d\t%d\t%d\n", fmtname(buf), st.uid, st.gid, st.ino, st.size); //print data
+      #else
       printf(1, "%s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);
+      #endif
     }
     break;
   }
@@ -83,3 +102,66 @@ main(int argc, char *argv[])
     ls(argv[i]);
   exit();
 }
+
+#ifdef CS333_P5
+// this is an ugly series of if statements but it works
+void
+print_mode(struct stat* st) // Added for Project 5: Modified Commands (copied from print_mode.c and inserted here as recommended in the assignment)
+{
+  switch (st->type) {
+    case T_DIR: printf(1, "d"); break;
+    case T_FILE: printf(1, "-"); break;
+    case T_DEV: printf(1, "c"); break;
+    default: printf(1, "?");
+  }
+
+  if (st->mode.flags.u_r)
+    printf(1, "r");
+  else
+    printf(1, "-");
+
+  if (st->mode.flags.u_w)
+    printf(1, "w");
+  else
+    printf(1, "-");
+
+  if ((st->mode.flags.u_x) & (st->mode.flags.setuid))
+    printf(1, "S");
+  else if (st->mode.flags.u_x)
+    printf(1, "x");
+  else
+    printf(1, "-");
+
+  if (st->mode.flags.g_r)
+    printf(1, "r");
+  else
+    printf(1, "-");
+
+  if (st->mode.flags.g_w)
+    printf(1, "w");
+  else
+    printf(1, "-");
+
+  if (st->mode.flags.g_x)
+    printf(1, "x");
+  else
+    printf(1, "-");
+
+  if (st->mode.flags.o_r)
+    printf(1, "r");
+  else
+    printf(1, "-");
+
+  if (st->mode.flags.o_w)
+    printf(1, "w");
+  else
+    printf(1, "-");
+
+  if (st->mode.flags.o_x)
+    printf(1, "x");
+  else
+    printf(1, "-");
+
+  return;
+}
+#endif

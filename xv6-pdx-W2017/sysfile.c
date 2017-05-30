@@ -440,3 +440,95 @@ sys_pipe(void)
   fd[1] = fd1;
   return 0;
 }
+
+#ifdef CS333_P5 // Added for Project 5: New Commands
+int
+sys_chmod(void)
+{
+  char *pathname;
+  int mode;
+  struct inode *ip;
+  
+  if(argint(1, &mode) < 0)
+    return -1;
+
+  if(mode < 0) // check that mode is non-negative
+    return -1;
+  
+  begin_op(); // from chdir
+  if(argstr(0, &pathname) < 0 || 
+     (ip = namei(pathname)) == 0){ // from chdir
+    end_op();
+    return -1;
+  }
+
+  ilock(ip); // from chdir
+  ip->mode.asInt = mode;
+  iupdate(ip); // from link
+  iunlock(ip); // from link
+
+  end_op(); // from chdir
+
+  return 0;
+}
+
+int
+sys_chown(void)
+{
+  char *pathname;
+  int uid;
+  struct inode *ip;
+
+  if(argint(1, &uid) < 0)
+    return -1;
+
+  if(uid < 0 || uid > 32767) // check uid bounds (sysproc)
+    return -1;
+
+  begin_op(); // from chdir
+  if(argstr(0, &pathname) < 0 ||
+     (ip = namei(pathname)) == 0){ // from chdir
+    end_op();
+    return -1; 
+  }
+
+  ilock(ip); // from chdir
+  ip->uid = uid;
+  iupdate(ip); // from link
+  iunlock(ip); // from link
+ 
+  end_op(); // from chdir
+
+  return 0;
+}
+
+int
+sys_chgrp(void)
+{
+  char *pathname;
+  int gid;
+  struct inode *ip;
+
+  if(argint(1, &gid) < 0)
+    return -1;
+
+  if(gid < 0 || gid > 32767) // check gid bounds (sysproc)
+    return -1;
+
+  begin_op(); // from chdir
+  if(argstr(0, &pathname) < 0 ||
+     (ip = namei(pathname)) == 0){ // from chdir
+    end_op();
+    return -1;
+  }
+
+  ilock(ip); // from chdir
+  ip->gid = gid;
+  iupdate(ip); // from link
+  iunlock(ip); // from link
+
+  end_op(); // from chdir
+
+  return 0;
+}
+#endif

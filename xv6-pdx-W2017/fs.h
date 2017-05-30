@@ -41,7 +41,7 @@ union mode_t {
     uint u_w : 1;
     uint u_r : 1; // user
     uint setuid : 1;
-    uint     : 22 // pad
+    uint     : 22; // pad
   } flags;
   uint asInt;
 };

@@ -83,6 +83,8 @@ bootmain.c
 #	     Added time.c for Project 2: The "time" Command
 #	     Added setpriority.c for Project 4: The setpriority() System Call
 #	     Added loopforever.c for testing. Project 4.
+#	     Added chmod, chown, chgrp for Project 5: New Commands
+#	     Added p5-test and testsetuidgid for Project 5: Testing
 # CS333 additions for Noah Mcaulay
 print_mode.c
 date.c
@@ -92,3 +94,9 @@ ps.c
 time.c
 setpriority.c
 loopforever.c
+chmod.c
+chown.c
+chgrp.c
+p5-test.c
+p5-test.h
+testsetuidgid.c
