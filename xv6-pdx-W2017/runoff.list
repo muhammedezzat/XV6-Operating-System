@@ -99,4 +99,4 @@ chown.c
 chgrp.c
 p5-test.c
 p5-test.h
-testsetuidgid.c
+testsetuid.c

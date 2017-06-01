@@ -170,7 +170,7 @@ UPROGS=\
 	_chown\
 	_chgrp\
 	_p5-test\
-	_testsetuidgid\
+	_testsetuid\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
