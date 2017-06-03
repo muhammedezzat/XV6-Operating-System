@@ -714,31 +714,31 @@ SYSCALL(setgid) // Added for Project 2: UIDs and GIDs and PPIDs
 
 00000422 <getprocs>:
 SYSCALL(getprocs) // Added for Project 2: The "ps" Command
- 422:	b8 1a 00 00 00       	mov    $0x1a,%eax
+ 422:	b8 1d 00 00 00       	mov    $0x1d,%eax
  427:	cd 40                	int    $0x40
  429:	c3                   	ret    
 
 0000042a <setpriority>:
 SYSCALL(setpriority) // Added for Project 4: The setpriority() System Call
- 42a:	b8 1b 00 00 00       	mov    $0x1b,%eax
+ 42a:	b8 1e 00 00 00       	mov    $0x1e,%eax
  42f:	cd 40                	int    $0x40
  431:	c3                   	ret    
 
 00000432 <chmod>:
 SYSCALL(chmod) // Added for Project 5: New System Calls
- 432:	b8 1c 00 00 00       	mov    $0x1c,%eax
+ 432:	b8 1f 00 00 00       	mov    $0x1f,%eax
  437:	cd 40                	int    $0x40
  439:	c3                   	ret    
 
 0000043a <chown>:
 SYSCALL(chown) // Added for Project 5: New System Calls
- 43a:	b8 1d 00 00 00       	mov    $0x1d,%eax
+ 43a:	b8 20 00 00 00       	mov    $0x20,%eax
  43f:	cd 40                	int    $0x40
  441:	c3                   	ret    
 
 00000442 <chgrp>:
 SYSCALL(chgrp) // Added for Project 5: New System Calls
- 442:	b8 1e 00 00 00       	mov    $0x1e,%eax
+ 442:	b8 21 00 00 00       	mov    $0x21,%eax
  447:	cd 40                	int    $0x40
  449:	c3                   	ret    
 

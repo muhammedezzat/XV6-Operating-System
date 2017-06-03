@@ -292,6 +292,7 @@ doExecTest(char **cmd)
     }
     wait();
   }
+  
   chown(cmd[0], uid);
   chgrp(cmd[0], gid);
   chmod(cmd[0], 00755);

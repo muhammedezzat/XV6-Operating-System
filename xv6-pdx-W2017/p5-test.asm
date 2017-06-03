@@ -1355,11 +1355,11 @@ doExecTest(char **cmd)
      d23:	a1 60 26 00 00       	mov    0x2660,%eax
      d28:	39 45 f4             	cmp    %eax,-0xc(%ebp)
      d2b:	0f 8c d0 fd ff ff    	jl     b01 <doExecTest+0xae>
-      else printf(2, "**** exec call for %s **FAILED as expected.\n", cmd[0]);
       exit();
     }
     wait();
   }
+  
   chown(cmd[0], uid);
      d31:	8b 45 08             	mov    0x8(%ebp),%eax
      d34:	8b 00                	mov    (%eax),%eax
@@ -2409,31 +2409,31 @@ SYSCALL(setgid) // Added for Project 2: UIDs and GIDs and PPIDs
 
 000014ca <getprocs>:
 SYSCALL(getprocs) // Added for Project 2: The "ps" Command
-    14ca:	b8 1a 00 00 00       	mov    $0x1a,%eax
+    14ca:	b8 1d 00 00 00       	mov    $0x1d,%eax
     14cf:	cd 40                	int    $0x40
     14d1:	c3                   	ret    
 
 000014d2 <setpriority>:
 SYSCALL(setpriority) // Added for Project 4: The setpriority() System Call
-    14d2:	b8 1b 00 00 00       	mov    $0x1b,%eax
+    14d2:	b8 1e 00 00 00       	mov    $0x1e,%eax
     14d7:	cd 40                	int    $0x40
     14d9:	c3                   	ret    
 
 000014da <chmod>:
 SYSCALL(chmod) // Added for Project 5: New System Calls
-    14da:	b8 1c 00 00 00       	mov    $0x1c,%eax
+    14da:	b8 1f 00 00 00       	mov    $0x1f,%eax
     14df:	cd 40                	int    $0x40
     14e1:	c3                   	ret    
 
 000014e2 <chown>:
 SYSCALL(chown) // Added for Project 5: New System Calls
-    14e2:	b8 1d 00 00 00       	mov    $0x1d,%eax
+    14e2:	b8 20 00 00 00       	mov    $0x20,%eax
     14e7:	cd 40                	int    $0x40
     14e9:	c3                   	ret    
 
 000014ea <chgrp>:
 SYSCALL(chgrp) // Added for Project 5: New System Calls
-    14ea:	b8 1e 00 00 00       	mov    $0x1e,%eax
+    14ea:	b8 21 00 00 00       	mov    $0x21,%eax
     14ef:	cd 40                	int    $0x40
     14f1:	c3                   	ret    
 

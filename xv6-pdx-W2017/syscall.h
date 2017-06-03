@@ -28,7 +28,7 @@
 #define SYS_getppid SYS_getgid+1 // Added for Project 2: UIDs and GIDs and PPIDs
 #define SYS_setuid  SYS_getppid+1 // Added for Project 2: UIDs and GIDs and PPIDs
 #define SYS_setgid  SYS_setuid+1 // Added for Project 2: UIDs and GIDs and PPIDs
-#define SYS_getprocs SYS_getgid+1 // Added for Project 2: The "ps" Command
+#define SYS_getprocs SYS_setgid+1 // Added for Project 2: The "ps" Command
 #define SYS_setpriority SYS_getprocs+1 // Added for Project 4: The setpriority() System Call
 #define SYS_chmod  SYS_setpriority+1 // Added for Project 5: New System Calls
 #define SYS_chown  SYS_chmod+1 // Added for Project 5: New System Calls
